@@ -1,6 +1,8 @@
 <?php
 
 include('../include.php');
+
+var_dump(app\Models\Planetes::find(3));
 //mannuel
 //$controller = new app\Controllers\PaysController();
 //$view = $controller->index();
@@ -13,6 +15,6 @@ link + /?controller=pays&action=index
 $controller = new $controllerName();
 $view = $controller->$actionName();
 $view->display();*/
-Kernel\Connexion::get();
-include('../app/views/index.php');
+
+
 ?>

@@ -46,12 +46,14 @@ class Connexion
         $stmt->execute($params);
         return $stmt->fetchAll(\PDO::FETCH_CLASS,$class);
     }
+    /*
+    
     
     public static function execute($query,$params=[]){
 
         $stmt=self::get()->prepare($query);
         $stmt->execute($params);
-    }
+    }*/
 }
 
 ?>
