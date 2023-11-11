@@ -9,33 +9,33 @@ class AstronautesController extends \Kernel\Controller
         $astronautes = \app\Models\Astronautes::all();
         return new \Kernel\View('astronautes/index.php',['astronautes'=>$astronautes]);
     }
-/*
+
     public function edit(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/form.php',['pays'=>$pays]);
+        $astronautes= \app\Models\Astronautes::find($_GET['astronautes']);
+        return new \Kernel\View('astronautes/form.php',['astronautes'=>$astronautes]);
     }
     
     public function update(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
-        $pays->name=$_POST['name'];
+        $astronautes= \app\Models\Astronautes::find($_POST['astronautes']);
+        $astronautes->nom=$_POST['nom'];
 
         //enregistrement dans la bdd
-        $pays->save();
-        header('Location:?controller=Pays&action=index');
+        $astronautes->save();
+        header('Location:?controller=Astronautes&action=index');
     }
 
     public function delete(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/confirmDelete.php',['pays'=>$pays]);
+        $astronautes= \app\Models\Astronautes::find($_GET['astronautes']);
+        return new \Kernel\View('astronautes/confirmDelete.php',['astronautes'=>$astronautes]);
     }
 
     public function deleteConfirm(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
+        $astronautes= \app\Models\Astronautes::find($_POST['astronautes']);
 
         //enregistrement dans la bdd
-        $pays->delete();
-        header('Location:?controller=Pays&action=index');
-    }*/
+        $astronautes->delete();
+        header('Location:?controller=Astronautes&action=index');
+    }
 }
 
 

@@ -9,33 +9,33 @@ class MissionsController extends \Kernel\Controller
         $missions = \app\Models\Missions::all();
         return new \Kernel\View('missions/index.php',['missions'=>$missions]);
     }
-/*
+
     public function edit(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/form.php',['pays'=>$pays]);
+        $missions= \app\Models\Missions::find($_GET['missions']);
+        return new \Kernel\View('missions/form.php',['missions'=>$missions]);
     }
     
     public function update(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
-        $pays->name=$_POST['name'];
+        $missions= \app\Models\Missions::find($_POST['missions']);
+        $missions->nom=$_POST['nom'];
 
         //enregistrement dans la bdd
-        $pays->save();
-        header('Location:?controller=Pays&action=index');
+        $missions->save();
+        header('Location:?controller=Missions&action=index');
     }
 
     public function delete(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/confirmDelete.php',['pays'=>$pays]);
+        $missions= \app\Models\Missions::find($_GET['missions']);
+        return new \Kernel\View('missions/confirmDelete.php',['missions'=>$missions]);
     }
 
     public function deleteConfirm(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
+        $missions= \app\Models\Missions::find($_POST['missions']);
 
         //enregistrement dans la bdd
-        $pays->delete();
-        header('Location:?controller=Pays&action=index');
-    }*/
+        $missions->delete();
+        header('Location:?controller=Missions&action=index');
+    }
 }
 
 

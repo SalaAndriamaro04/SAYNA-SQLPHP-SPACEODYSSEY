@@ -9,33 +9,33 @@ class VaisseauxController extends \Kernel\Controller
         $vaisseaux = \app\Models\Vaisseaux::all();
         return new \Kernel\View('vaisseaux/index.php',['vaisseaux'=>$vaisseaux]);
     }
-/*
+
     public function edit(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/form.php',['pays'=>$pays]);
+        $vaisseaux= \app\Models\Vaisseaux::find($_GET['vaisseaux']);
+        return new \Kernel\View('vaisseaux/form.php',['vaisseaux'=>$vaisseaux]);
     }
     
     public function update(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
-        $pays->name=$_POST['name'];
+        $vaisseaux= \app\Models\Vaisseaux::find($_POST['vaisseaux']);
+        $vaisseaux->nom=$_POST['nom'];
 
         //enregistrement dans la bdd
-        $pays->save();
-        header('Location:?controller=Pays&action=index');
+        $vaisseaux->save();
+        header('Location:?controller=Vaisseaux&action=index');
     }
 
     public function delete(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/confirmDelete.php',['pays'=>$pays]);
+        $vaisseaux= \app\Models\Vaisseaux::find($_GET['vaisseaux']);
+        return new \Kernel\View('vaisseaux/confirmDelete.php',['vaisseaux'=>$vaisseaux]);
     }
 
     public function deleteConfirm(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
+        $vaisseaux= \app\Models\Vaisseaux::find($_POST['vaisseaux']);
 
         //enregistrement dans la bdd
-        $pays->delete();
-        header('Location:?controller=Pays&action=index');
-    }*/
+        $vaisseaux->delete();
+        header('Location:?controller=Vaisseaux&action=index');
+    }
 }
 
 

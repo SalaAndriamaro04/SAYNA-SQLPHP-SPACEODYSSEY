@@ -23,19 +23,19 @@ class PlanetesController extends \Kernel\Controller
         $planetes->save();
         header('Location:?controller=Planetes&action=index');
     }
-/* 
+
     public function delete(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/confirmDelete.php',['pays'=>$pays]);
+        $planetes= \app\Models\Planetes::find($_GET['planetes']);
+        return new \Kernel\View('planetes/confirmDelete.php',['planetes'=>$planetes]);
     }
 
     public function deleteConfirm(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
+        $planetes= \app\Models\Planetes::find($_POST['planetes']);
 
         //enregistrement dans la bdd
-        $pays->delete();
-        header('Location:?controller=Pays&action=index');
-    }*/
+        $planetes->delete();
+        header('Location:?controller=Planetes&action=index');
+    }
 }
 
 

@@ -27,11 +27,9 @@ class Model{
         return $class::$table;
     }
 
-/*
-
     public function delete(){
         $query='delete from '.$this->getTable().' where id=:id';
         Connexion::execute($query,['id'=>$this->id]); 
-    }*/
+    }
 }
 ?>
