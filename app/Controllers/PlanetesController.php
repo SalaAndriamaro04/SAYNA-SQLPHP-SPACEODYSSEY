@@ -9,21 +9,21 @@ class PlanetesController extends \Kernel\Controller
         $planetes = \app\Models\Planetes::all();
         return new \Kernel\View('planetes/index.php',['planetes'=>$planetes]);
     }
-/*
+
     public function edit(){
-        $pays= \app\Models\Pays::find($_GET['pays']);
-        return new \Kernel\View('pays/form.php',['pays'=>$pays]);
+        $planetes= \app\Models\Planetes::find($_GET['planetes']);
+        return new \Kernel\View('planetes/form.php',['planetes'=>$planetes]);
     }
-    
+   
     public function update(){
-        $pays= \app\Models\Pays::find($_POST['pays']);
-        $pays->name=$_POST['name'];
+        $planetes= \app\Models\Planetes::find($_POST['planetes']);
+        $planetes->nom=$_POST['nom'];
 
         //enregistrement dans la bdd
-        $pays->save();
-        header('Location:?controller=Pays&action=index');
+        $planetes->save();
+        header('Location:?controller=Planetes&action=index');
     }
-
+/* 
     public function delete(){
         $pays= \app\Models\Pays::find($_GET['pays']);
         return new \Kernel\View('pays/confirmDelete.php',['pays'=>$pays]);
