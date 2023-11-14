@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 11 nov. 2023 à 13:27
+-- Généré le : mar. 14 nov. 2023 à 15:16
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.1.12
 
@@ -18,8 +18,20 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `odyssey`
+-- Base de données : `evaluation2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `assignation_mission_astronaute`
+--
+
+CREATE TABLE `assignation_mission_astronaute` (
+  `id_assignation` int(11) NOT NULL,
+  `id_mission` int(11) NOT NULL,
+  `id_astronaute` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -28,24 +40,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `astronautes` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `taille` int(11) NOT NULL,
-  `poids` int(11) NOT NULL,
-  `nationalite` char(20) NOT NULL,
-  `etatSante` enum('bon','malade','décédé','') NOT NULL,
-  `planetes_id` int(11) NOT NULL
+  `id_astronaute` int(11) NOT NULL,
+  `nom_astronaute` varchar(100) DEFAULT NULL,
+  `etat_sante` enum('Bon','malade','décédé') DEFAULT NULL,
+  `taille` int(11) DEFAULT NULL,
+  `poids` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `astronautes`
 --
 
-INSERT INTO `astronautes` (`id`, `nom`, `prenom`, `taille`, `poids`, `nationalite`, `etatSante`, `planetes_id`) VALUES
-(2, 'Jean Jacques', 'Rousseaux', 65, 70, 'French', 'bon', 1),
-(3, 'Jimy', 'Page', 56, 60, 'Italian', 'malade', 2),
-(4, 'Courtney', 'Laurie', 66, 72, 'Mexican', 'décédé', 3);
+INSERT INTO `astronautes` (`id_astronaute`, `nom_astronaute`, `etat_sante`, `taille`, `poids`) VALUES
+(1, 'John', 'Bon', 65, 70),
+(2, 'carter', 'Bon', 66, 72);
 
 -- --------------------------------------------------------
 
@@ -54,26 +62,13 @@ INSERT INTO `astronautes` (`id`, `nom`, `prenom`, `taille`, `poids`, `nationalit
 --
 
 CREATE TABLE `missions` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(200) NOT NULL,
-  `objectif` varchar(200) NOT NULL,
-  `dateDebut` datetime NOT NULL,
-  `dateFin` datetime NOT NULL,
-  `lieu` point NOT NULL,
-  `equipe` int(11) NOT NULL,
-  `statut` enum('en cours','terminé','','') NOT NULL,
-  `vaisseaux_id` int(11) NOT NULL,
-  `planetes_id` int(11) NOT NULL
+  `id_mission` int(11) NOT NULL,
+  `nom_mission` varchar(100) DEFAULT NULL,
+  `id_vaisseau` int(11) DEFAULT NULL,
+  `date_debut` date DEFAULT NULL,
+  `date_fin` date DEFAULT NULL,
+  `status` enum('en préparation','en cours','terminée','abandonnée') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `missions`
---
-
-INSERT INTO `missions` (`id`, `nom`, `objectif`, `dateDebut`, `dateFin`, `lieu`, `equipe`, `statut`, `vaisseaux_id`, `planetes_id`) VALUES
-(1, 'cohérence climatique', 'Dans le cadre de recherche un endroit pour vivre autrement, l\'homme cherche la cohérence climatique à la planète Terre', '2023-11-11 08:02:43', '2023-11-11 08:02:43', 0x0000000001010000000000000000c493400000000000004c40, 3, 'en cours', 1, 1),
-(2, 'Reconnaissance', 'Reconnaître une planète pour passer à la mise en place d\'un système de filtrage d\'oxygène', '2023-11-11 08:55:17', '2023-11-11 08:55:17', 0x00000000010100000000000000809eeb4000000000603fed40, 2, 'terminé', 1, 2),
-(3, 'Abstraction', 'Le vif du sujet spatial fait remonter le temps au monde entier. Il y a une discrétion à prétendre.', '2023-11-11 08:55:17', '2023-11-11 08:55:17', 0x00000000010100000000000000a0f1e64000000000e0d3e740, 1, 'en cours', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -82,21 +77,21 @@ INSERT INTO `missions` (`id`, `nom`, `objectif`, `dateDebut`, `dateFin`, `lieu`,
 --
 
 CREATE TABLE `planetes` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(200) NOT NULL,
-  `circonference` float NOT NULL,
-  `distanceTerre` float NOT NULL,
-  `conditionEnvironnement` varchar(200) NOT NULL
+  `id_planete` int(11) NOT NULL,
+  `nom_planete` varchar(100) DEFAULT NULL,
+  `circonférence_km` decimal(10,2) DEFAULT NULL,
+  `distance_terre_km` decimal(10,2) DEFAULT NULL,
+  `documentation` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `planetes`
 --
 
-INSERT INTO `planetes` (`id`, `nom`, `circonference`, `distanceTerre`, `conditionEnvironnement`) VALUES
-(1, 'Mercure', 26598800, 56986300, 'Difficile en oxygène, trop humide'),
-(2, 'Venus', 156999000, 45866200000, 'Trop humide, air chaud supérieur à la normale'),
-(3, 'Mars', 5568980000000, 5649900000, 'trop humide, air chaud supérieur à la normale, difficulté respiratoire');
+INSERT INTO `planetes` (`id_planete`, `nom_planete`, `circonférence_km`, `distance_terre_km`, `documentation`) VALUES
+(1, 'Mars', '99999999.99', '99999999.99', 'mdfimsdfijmsdifjiameira'),
+(2, 'Terre', '99999999.99', '99999999.99', 'FSQFSQFQSFQ'),
+(3, 'TERRE', '99999999.99', '32424132.23', 'SDFQFQSF');
 
 -- --------------------------------------------------------
 
@@ -105,105 +100,98 @@ INSERT INTO `planetes` (`id`, `nom`, `circonference`, `distanceTerre`, `conditio
 --
 
 CREATE TABLE `vaisseaux` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(200) NOT NULL,
-  `dimension` int(11) NOT NULL,
-  `capacite` int(11) NOT NULL,
-  `statut` enum('en réparation','bonne','ruiné','') NOT NULL,
-  `astronautes_id` int(11) NOT NULL
+  `id_vaisseau` int(11) NOT NULL,
+  `nom_vaisseau` varchar(100) DEFAULT NULL,
+  `capacite` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `vaisseaux`
---
-
-INSERT INTO `vaisseaux` (`id`, `nom`, `dimension`, `capacite`, `statut`, `astronautes_id`) VALUES
-(1, 'Bravo01', 6589421, 6983564, 'bonne', 2),
-(2, 'Alpha01', 45699893, 4598632, 'en réparation', 3),
-(3, 'Delta01', 456989965, 5687521, 'ruiné', 4);
 
 --
 -- Index pour les tables déchargées
 --
 
 --
+-- Index pour la table `assignation_mission_astronaute`
+--
+ALTER TABLE `assignation_mission_astronaute`
+  ADD PRIMARY KEY (`id_assignation`,`id_mission`,`id_astronaute`),
+  ADD KEY `id_mission` (`id_mission`),
+  ADD KEY `id_astronaute` (`id_astronaute`);
+
+--
 -- Index pour la table `astronautes`
 --
 ALTER TABLE `astronautes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `planetes_id` (`planetes_id`);
+  ADD PRIMARY KEY (`id_astronaute`);
 
 --
 -- Index pour la table `missions`
 --
 ALTER TABLE `missions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `planetes_id` (`planetes_id`),
-  ADD KEY `vaisseaux_id` (`vaisseaux_id`);
+  ADD PRIMARY KEY (`id_mission`),
+  ADD KEY `id_vaisseau` (`id_vaisseau`);
 
 --
 -- Index pour la table `planetes`
 --
 ALTER TABLE `planetes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_planete`);
 
 --
 -- Index pour la table `vaisseaux`
 --
 ALTER TABLE `vaisseaux`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `astronautes_id` (`astronautes_id`);
+  ADD PRIMARY KEY (`id_vaisseau`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
+-- AUTO_INCREMENT pour la table `assignation_mission_astronaute`
+--
+ALTER TABLE `assignation_mission_astronaute`
+  MODIFY `id_assignation` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `astronautes`
 --
 ALTER TABLE `astronautes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_astronaute` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `missions`
 --
 ALTER TABLE `missions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mission` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `planetes`
 --
 ALTER TABLE `planetes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_planete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `vaisseaux`
 --
 ALTER TABLE `vaisseaux`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_vaisseau` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `astronautes`
+-- Contraintes pour la table `assignation_mission_astronaute`
 --
-ALTER TABLE `astronautes`
-  ADD CONSTRAINT `astronautes_ibfk_1` FOREIGN KEY (`planetes_id`) REFERENCES `planetes` (`id`);
+ALTER TABLE `assignation_mission_astronaute`
+  ADD CONSTRAINT `assignation_mission_astronaute_ibfk_1` FOREIGN KEY (`id_mission`) REFERENCES `missions` (`id_mission`),
+  ADD CONSTRAINT `assignation_mission_astronaute_ibfk_2` FOREIGN KEY (`id_astronaute`) REFERENCES `astronautes` (`id_astronaute`);
 
 --
 -- Contraintes pour la table `missions`
 --
 ALTER TABLE `missions`
-  ADD CONSTRAINT `missions_ibfk_1` FOREIGN KEY (`planetes_id`) REFERENCES `planetes` (`id`),
-  ADD CONSTRAINT `missions_ibfk_2` FOREIGN KEY (`vaisseaux_id`) REFERENCES `vaisseaux` (`id`);
-
---
--- Contraintes pour la table `vaisseaux`
---
-ALTER TABLE `vaisseaux`
-  ADD CONSTRAINT `vaisseaux_ibfk_1` FOREIGN KEY (`astronautes_id`) REFERENCES `astronautes` (`id`);
+  ADD CONSTRAINT `missions_ibfk_1` FOREIGN KEY (`id_vaisseau`) REFERENCES `vaisseaux` (`id_vaisseau`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
